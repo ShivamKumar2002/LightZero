@@ -95,9 +95,9 @@ cfg['world_model'] = {
 
                       'attention': 'causal',
 
-                      # 'num_layers': 1, # TODO：for atari debug
+                      'num_layers': 1, # TODO：for atari debug
                       # 'num_layers': 2, # TODO：for atari debug
-                      'num_layers': 4, # TODO：for atari debug
+                      # 'num_layers': 4, # TODO：for atari debug
                       # 'num_layers': 6, # TODO：for atari debug
                       # 'num_layers': 8, # TODO：for atari debug
                       # 'num_layers': 12, # TODO：for atari debug

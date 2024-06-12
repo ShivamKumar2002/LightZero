@@ -388,10 +388,10 @@ class WorldModel(nn.Module):
             x = self.transformer(sequences, past_keys_values, valid_context_lengths=valid_context_lengths)
             # ============ visualize_attention_map ================= 
             # TODO: only in train 注意不要是在计算target value的时候
-            if 'obs_embeddings_and_act_tokens' in obs_embeddings_or_act_tokens.keys():
-                from lzero.model.gpt_models.attention_map import visualize_attention_map, visualize_attention_maps
-                # visualize_attention_maps(self.transformer, sequences, past_keys_values, valid_context_lengths, 'visual_match_memlen1-60-15/one_fail_episode/attn_map_all_head_layer_v2', nhead_each_row=4)
-                visualize_attention_maps(self.transformer, sequences, past_keys_values, valid_context_lengths, 'pong_H10_H4/one_fail_episode/attn_map_all_head_layer_v2', nhead_each_row=8)
+            # if 'obs_embeddings_and_act_tokens' in obs_embeddings_or_act_tokens.keys():
+            #     from lzero.model.gpt_models.attention_map import visualize_attention_map, visualize_attention_maps
+            #     # visualize_attention_maps(self.transformer, sequences, past_keys_values, valid_context_lengths, 'visual_match_memlen1-60-15/one_fail_episode/attn_map_all_head_layer_v2', nhead_each_row=4)
+            #     visualize_attention_maps(self.transformer, sequences, past_keys_values, valid_context_lengths, 'pong_H10_H4/one_fail_episode/attn_map_all_head_layer_v2', nhead_each_row=8)
 
                 # past_keys_values = None
                 # for layer_id in range(8):
@@ -1016,7 +1016,7 @@ class WorldModel(nn.Module):
         predict_policy = F.softmax(outputs.logits_policy, dim=-1)
         predict_value = inverse_scalar_transform_handle(outputs.logits_value.reshape(-1,101)).reshape(batch['observations'].shape[0],batch['observations'].shape[1],1) # predict_value: torch.Size([2, 17, 1])
         predict_rewards = inverse_scalar_transform_handle(outputs.logits_rewards.reshape(-1,101)).reshape(batch['observations'].shape[0],batch['observations'].shape[1],1) # predict_rewards: torch.Size([2, 17, 1])
-        # import pdb; pdb_set_trace()
+        import pdb; pdb.set_trace()
         # self.visualize_reward_value_img_policy(original_images, reconstructed_images, target_predict_value, true_rewards, target_policy, predict_value, predict_rewards, predict_policy, not_plot_timesteps=list(np.arange(4,60)), suffix='visual_match_memlen1-60-15') # TODO
 
         # self.visualize_reward_value_img_policy(original_images, reconstructed_images, target_predict_value, true_rewards, target_policy, predict_value, predict_rewards, predict_policy, not_plot_timesteps=list(np.arange(4,60)), suffix='visual_match_memlen1-60-15/one_success_episode') # TODO
@@ -1373,7 +1373,7 @@ class WorldModel(nn.Module):
 
 
             plt.tight_layout()
-            directory = f'/mnt/afs/niuyazhe/code/LightZero/render/{suffix}'
+            directory = f'/mnt/afs/niuyazhe/code/LightZero/render_0612/{suffix}'
             if not os.path.exists(directory):
                 os.makedirs(directory)
             plt.savefig(f'{directory}/visualization_sequence_{batch_idx}_reward_value_img_policy_mcts-policy.png')

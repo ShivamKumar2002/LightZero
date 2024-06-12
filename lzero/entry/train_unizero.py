@@ -152,7 +152,7 @@ def train_unizero(
     )
     policy.last_batch_action = [-1 for _ in range(len(evaluator_env_cfg))]
     # TODO: comment if debugging
-    # stop, reward = evaluator.eval(learner.save_checkpoint, learner.train_iter, collector.envstep)
+    stop, reward = evaluator.eval(learner.save_checkpoint, learner.train_iter, collector.envstep)
 
     while True:
         collect_cnt += 1
@@ -217,8 +217,8 @@ def train_unizero(
             # for i in range(cfg.policy.update_per_collect_transformer):
             for i in range(update_per_collect):
                 # Learner will train ``update_per_collect`` times in one iteration.
-                # if replay_buffer.get_num_of_transitions() > batch_size:
-                if replay_buffer.get_num_of_game_segments() > batch_size:  # TODO: for memory env
+                if replay_buffer.get_num_of_transitions() > batch_size:
+                # if replay_buffer.get_num_of_game_segments() > batch_size:  # TODO: only for memory env
                     train_data = replay_buffer.sample(batch_size, policy)
                     if cfg.policy.reanalyze_ratio > 0:
                         if i % 20 == 0:
