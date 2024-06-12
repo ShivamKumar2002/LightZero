@@ -943,7 +943,6 @@ class WorldModel(nn.Module):
             true_rewards = inverse_scalar_transform_handle(batch['rewards'].reshape(-1,101)).reshape(batch['observations'].shape[0],batch['observations'].shape[1],1) # torch.Size([2, 17, 1])
             #  ========== for visualize ==========
 
-
             # 计算重建损失和感知损失 TODO
             # latent_recon_loss = self.tokenizer.reconstruction_loss(batch['observations'].reshape(-1, 3, 64, 64), reconstructed_images) # NOTE: for stack=1
             # perceptual_loss = self.tokenizer.perceptual_loss(batch['observations'].reshape(-1, 3, 64, 64), reconstructed_images) # NOTE: for stack=1
@@ -1016,7 +1015,7 @@ class WorldModel(nn.Module):
         predict_policy = F.softmax(outputs.logits_policy, dim=-1)
         predict_value = inverse_scalar_transform_handle(outputs.logits_value.reshape(-1,101)).reshape(batch['observations'].shape[0],batch['observations'].shape[1],1) # predict_value: torch.Size([2, 17, 1])
         predict_rewards = inverse_scalar_transform_handle(outputs.logits_rewards.reshape(-1,101)).reshape(batch['observations'].shape[0],batch['observations'].shape[1],1) # predict_rewards: torch.Size([2, 17, 1])
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         # self.visualize_reward_value_img_policy(original_images, reconstructed_images, target_predict_value, true_rewards, target_policy, predict_value, predict_rewards, predict_policy, not_plot_timesteps=list(np.arange(4,60)), suffix='visual_match_memlen1-60-15') # TODO
 
         # self.visualize_reward_value_img_policy(original_images, reconstructed_images, target_predict_value, true_rewards, target_policy, predict_value, predict_rewards, predict_policy, not_plot_timesteps=list(np.arange(4,60)), suffix='visual_match_memlen1-60-15/one_success_episode') # TODO
